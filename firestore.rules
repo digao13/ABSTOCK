@@ -1,0 +1,210 @@
+rules_version = '2';
+
+service cloud.firestore {
+    match /databases/{database}/documents {
+
+        function autenticado() {
+            return request.auth != null;
+        }
+
+        function perfilExiste() {
+            return autenticado()
+                && exists(
+                    /databases/$(database)/documents/usuarios/$(request.auth.uid)
+                );
+        }
+
+        function perfilAtual() {
+            return get(
+                /databases/$(database)/documents/usuarios/$(request.auth.uid)
+            ).data.perfil;
+        }
+
+        function temAcessoSistema() {
+            return perfilExiste()
+                && perfilAtual() in [
+                    "administrador",
+                    "gestor",
+                    "solicitante",
+                    "consulta"
+                ];
+        }
+
+        function gerenciaEstoque() {
+            return perfilExiste()
+                && perfilAtual() in ["administrador", "gestor"];
+        }
+
+        function ehAdministrador() {
+            return perfilExiste()
+                && perfilAtual() == "administrador";
+        }
+
+        function movimentacaoCorrespondeAoSaldo(produtoId) {
+            let movimentacaoId = request.resource.data.ultimaMovimentacaoId;
+            let movimentacao = getAfter(
+                /databases/$(database)/documents/movimentacoesEstoque/$(movimentacaoId)
+            );
+
+            return movimentacaoId is string
+                && movimentacao.data.produtoId == produtoId
+                && movimentacao.data.criadoPor == request.auth.uid
+                && movimentacao.data.estoqueAnterior
+                    == resource.data.estoqueAtual
+                && movimentacao.data.estoquePosterior
+                    == request.resource.data.estoqueAtual;
+        }
+
+        function atualizacaoDeSaldoValida(produtoId) {
+            return request.resource.data.diff(resource.data)
+                .affectedKeys()
+                .hasOnly([
+                    "estoqueAtual",
+                    "ultimaMovimentacaoId",
+                    "atualizadoEm",
+                    "atualizadoPor"
+                ])
+                && request.resource.data.atualizadoPor == request.auth.uid
+                && movimentacaoCorrespondeAoSaldo(produtoId);
+        }
+
+        function produtoAtualizadoPelaMovimentacao(movimentacaoId) {
+            let produtoId = request.resource.data.produtoId;
+            let produtoAnterior = get(
+                /databases/$(database)/documents/produtos/$(produtoId)
+            );
+            let produtoPosterior = getAfter(
+                /databases/$(database)/documents/produtos/$(produtoId)
+            );
+
+            return exists(
+                    /databases/$(database)/documents/produtos/$(produtoId)
+                )
+                && produtoPosterior.data.ultimaMovimentacaoId
+                    == movimentacaoId
+                && request.resource.data.estoqueAnterior
+                    == produtoAnterior.data.estoqueAtual
+                && request.resource.data.estoquePosterior
+                    == produtoPosterior.data.estoqueAtual
+                && (
+                    request.resource.data.tipo == "entrada"
+                    && request.resource.data.estoquePosterior
+                        == request.resource.data.estoqueAnterior
+                            + request.resource.data.quantidade
+                    || request.resource.data.tipo == "saida"
+                    && request.resource.data.estoquePosterior
+                        == request.resource.data.estoqueAnterior
+                            - request.resource.data.quantidade
+                );
+        }
+
+        match /usuarios/{userId} {
+            allow get: if autenticado()
+                && (request.auth.uid == userId || ehAdministrador());
+            allow list: if ehAdministrador();
+            allow create: if ehAdministrador()
+                && request.resource.data.nome is string
+                && request.resource.data.email is string
+                && request.resource.data.perfil in [
+                    "administrador",
+                    "gestor",
+                    "solicitante",
+                    "consulta"
+                ]
+                && request.resource.data.ativo is bool;
+
+            allow update: if ehAdministrador()
+                && request.resource.data.nome is string
+                && request.resource.data.email == resource.data.email
+                && request.resource.data.perfil in [
+                    "administrador",
+                    "gestor",
+                    "solicitante",
+                    "consulta"
+                ]
+                && request.resource.data.ativo is bool;
+
+            allow delete: if ehAdministrador()
+                && userId != request.auth.uid;
+        }
+
+        match /produtos/{produtoId} {
+            allow read: if temAcessoSistema();
+
+            allow create: if gerenciaEstoque()
+                && request.resource.data.estoqueAtual == 0
+                && request.resource.data.criadoPor == request.auth.uid
+                && request.resource.data.atualizadoPor == request.auth.uid;
+
+            allow update: if gerenciaEstoque()
+                && (
+                    request.resource.data.estoqueAtual
+                        == resource.data.estoqueAtual
+                    || atualizacaoDeSaldoValida(produtoId)
+                );
+
+            allow delete: if ehAdministrador();
+        }
+
+        match /movimentacoesEstoque/{movimentacaoId} {
+            allow read: if temAcessoSistema();
+
+            allow create: if gerenciaEstoque()
+                && request.resource.data.criadoPor == request.auth.uid
+                && request.resource.data.quantidade > 0
+                && request.resource.data.tipo in ["entrada", "saida"]
+                && request.resource.data.origem in [
+                    "compra",
+                    "notaFiscal",
+                    "entradaManual",
+                    "devolucao",
+                    "ajuste",
+                    "outros"
+                ]
+                && produtoAtualizadoPelaMovimentacao(movimentacaoId);
+
+
+            allow update, delete: if false;
+        }
+
+        match /fornecedores/{fornecedorId} {
+            allow read: if temAcessoSistema();
+            allow create, update: if gerenciaEstoque();
+            allow delete: if ehAdministrador();
+        }
+
+        match /solicitacoesCompra/{solicitacaoId} {
+            allow read: if temAcessoSistema();
+            allow create, update: if gerenciaEstoque();
+            allow delete: if ehAdministrador();
+        }
+
+        match /compras/{compraId} {
+            allow read: if temAcessoSistema();
+            allow create, update: if gerenciaEstoque();
+            allow delete: if ehAdministrador();
+        }
+        match /filiais/{filialId} {
+            allow read: if temAcessoSistema();
+            allow create, update: if gerenciaEstoque();
+            allow delete: if ehAdministrador();
+        }
+        match /tarefas/{tarefaId} {
+            allow read: if temAcessoSistema();
+            allow create: if perfilExiste()
+                && perfilAtual() in ["administrador", "gestor", "solicitante"]
+                && request.resource.data.criadoPor == request.auth.uid;
+            allow update: if perfilExiste()
+                && perfilAtual() in ["administrador", "gestor", "solicitante"];
+            allow delete: if perfilExiste()
+                && perfilAtual() in ["administrador", "gestor"];
+        }
+
+        match /{document=**} {
+            allow read, write: if false;
+        }
+    }
+}
+
+
+

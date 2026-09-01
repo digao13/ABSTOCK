@@ -109,3 +109,264 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Padrão visual dos modais do sistema: tema escuro e leitura confortável. */
+.MuiDialog-root .MuiDialog-paper {
+  background: #1a1d23 !important;
+  color: #f5f7fa !important;
+  background-image: none !important;
+  border: 1px solid #303640;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+}
+.MuiDialog-root .MuiDialogTitle-root,
+.MuiDialog-root .MuiDialogContent-root,
+.MuiDialog-root .MuiDialogActions-root {
+  color: #f5f7fa;
+}
+.MuiDialog-root .MuiDialogContent-root { border-color: #303640 !important; }
+.MuiDialog-root .MuiInputLabel-root { color: #aeb8c5; }
+.MuiDialog-root .MuiInputBase-root { color: #f5f7fa; background: rgba(255,255,255,.025); }
+.MuiDialog-root .MuiOutlinedInput-notchedOutline { border-color: #3c4653; }
+.MuiDialog-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.MuiDialog-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline { border-color: #ff8a24; }
+.MuiDialog-root .MuiMenuItem-root { color: #f5f7fa; }
+.MuiDialog-root .MuiMenuItem-root:hover,
+.MuiDialog-root .MuiMenuItem-root.Mui-selected { background: rgba(255,138,36,.16); }
+@media (max-width: 600px) {
+  .MuiDialog-root .MuiDialog-paper { margin: 12px; width: calc(100% - 24px); border-radius: 16px; }
+  .MuiDialog-root .MuiDialogTitle-root { padding: 18px 18px 10px; }
+  .MuiDialog-root .MuiDialogContent-root { padding: 12px 18px 18px; }
+  .MuiDialog-root .MuiDialogActions-root { padding: 10px 18px 16px; flex-wrap: wrap; }
+  .MuiDialog-root .MuiDialogActions-root > .MuiButton-root { flex: 1 1 120px; }
+}
+.MuiPopover-paper,
+.MuiMenu-paper {
+  background: #1a1d23 !important;
+  color: #f5f7fa !important;
+  border: 1px solid #303640;
+}
+.MuiMenuItem-root { color: #f5f7fa; }
+.MuiMenuItem-root:hover,
+.MuiMenuItem-root.Mui-selected { background: rgba(255,138,36,.16) !important; }
+
+/* Ícones com contraste consistente no tema escuro. */
+.MuiSvgIcon-root { color: #d6dde8; }
+.MuiIconButton-root .MuiSvgIcon-root,
+.MuiButton-root .MuiSvgIcon-root,
+.MuiTableCell-root .MuiSvgIcon-root { color: currentColor; }
+.MuiSvgIcon-colorWarning { color: #ff9b3d !important; }
+.MuiSvgIcon-colorError { color: #ff6b6b !important; }
+.MuiSvgIcon-colorSuccess { color: #63d391 !important; }
+.MuiSvgIcon-colorPrimary { color: #55a8ff !important; }
+
+/* Linguagem visual compartilhada por todas as telas. */
+body {
+  background: #0f1115;
+  color: #f5f7fa;
+}
+#root { background: #0f1115; color: #f5f7fa; }
+.MuiButton-root {
+  min-height: 40px;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: .1px;
+  text-transform: none;
+}
+.MuiButton-contained,
+.MuiButton-containedPrimary {
+  color: #17191e !important;
+  background: linear-gradient(135deg, #ff7a00, #ff9b3d) !important;
+}
+.MuiButton-contained:hover,
+.MuiButton-containedPrimary:hover { background: linear-gradient(135deg, #ff8a24, #ffad5d) !important; }
+.MuiButton-outlined { color: #ffae66; border-color: #c76a22; }
+.MuiButton-outlined:hover { border-color: #ff9b3d; background: rgba(255,138,36,.10); }
+.MuiButton-text { color: #ffae66; }
+.MuiButton-text:hover { background: rgba(255,138,36,.10); }
+.MuiCard-root,
+.MuiPaper-root { background-color: #1a1d23; color: #f5f7fa; border-color: #303640; }
+.MuiTextField-root .MuiInputBase-input,
+.MuiTextField-root textarea { color: #f5f7fa; }
+.MuiInputBase-input::placeholder { color: #8995a5; opacity: 1; }
+.MuiFormHelperText-root { color: #9ca8b6; }
+.MuiCheckbox-root { color: #9ca8b6; }
+.MuiCheckbox-root.Mui-checked { color: #ff9b3d; }
+.MuiTableHead-root .MuiTableCell-root { background: #20242b; color: #c9d1dc; font-weight: 700; }
+.MuiTableBody-root .MuiTableRow-root:hover { background: rgba(255,255,255,.035); }
+.MuiTabs-indicator { background-color: #ff9b3d; height: 3px; }
+.MuiTab-root { color: #9ca8b6; text-transform: none; font-weight: 700; }
+.MuiTab-root.Mui-selected { color: #ffae66; }
+.MuiTooltip-tooltip { background: #252b34; color: #f5f7fa; font-size: .78rem; }
+.MuiButton-containedError { color: #fff !important; background: #d95757 !important; }
+.MuiButton-containedSuccess { color: #102018 !important; background: #63d391 !important; }
+.MuiButton-containedWarning { color: #17191e !important; background: #ff9b3d !important; }
+.MuiIconButton-root { border-radius: 10px; }
+.MuiIconButton-root:hover { background: rgba(255,255,255,.08); }
+/* Ícones de ação nunca devem herdar preto do botão ou da tabela. */
+.MuiIconButton-root { color: #d6dde8; }
+.MuiIconButton-root .MuiSvgIcon-root { color: inherit; }
+.MuiIconButton-root.MuiIconButton-colorPrimary { color: #55a8ff; }
+.MuiIconButton-root.MuiIconButton-colorError { color: #ff6b6b; }
+.MuiIconButton-root.MuiIconButton-colorSuccess { color: #63d391; }
+.MuiIconButton-root.MuiIconButton-colorWarning { color: #ff9b3d; }
+/* Prioridade alta para estilos do MUI injetados depois do CSS da aplicação. */
+.MuiIconButton-root { color: #d6dde8 !important; }
+.MuiIconButton-root .MuiSvgIcon-root { color: inherit !important; }
+.MuiIconButton-root.MuiIconButton-colorPrimary { color: #55a8ff !important; }
+.MuiIconButton-root.MuiIconButton-colorError { color: #ff6b6b !important; }
+.MuiIconButton-root.MuiIconButton-colorSuccess { color: #63d391 !important; }
+.MuiIconButton-root.MuiIconButton-colorWarning { color: #ff9b3d !important; }
+.MuiDialog-root .MuiInputBase-input,
+.MuiDialog-root .MuiInputBase-input.Mui-disabled,
+.MuiDialog-root .MuiSelect-select,
+.MuiDialog-root .MuiSelect-icon { color: #f5f7fa !important; -webkit-text-fill-color: #f5f7fa !important; }
+.MuiDialog-root .MuiFormLabel-root,
+.MuiDialog-root .MuiFormHelperText-root { color: #aeb8c5 !important; }
+.MuiInputBase-input,
+.MuiInputBase-input.Mui-disabled,
+.MuiSelect-select,
+.MuiSelect-icon { color: #f5f7fa !important; -webkit-text-fill-color: #f5f7fa !important; }
+.MuiFormLabel-root { color: #aeb8c5 !important; }
+.MuiFormHelperText-root { color: #9ca8b6 !important; }
+.MuiSvgIcon-colorAction { color: #d6dde8 !important; }
+.MuiButton-colorPrimary .MuiSvgIcon-root { color: #55a8ff !important; }
+
+/* Variante clara controlada pelo seletor do MainLayout. */
+:root[data-theme="light"] body,
+:root[data-theme="light"] #root { background: #f4f6f8; color: #18212b; }
+:root[data-theme="light"] .MuiCard-root,
+:root[data-theme="light"] .MuiPaper-root { background-color: #fff; color: #18212b; border-color: rgba(24,33,43,.14); }
+:root[data-theme="light"] .MuiTableHead-root .MuiTableCell-root { background: #eef1f4; color: #344454; }
+:root[data-theme="light"] .MuiInputBase-input,
+:root[data-theme="light"] .MuiInputBase-input.Mui-disabled,
+:root[data-theme="light"] .MuiSelect-select,
+:root[data-theme="light"] .MuiSelect-icon { color: #18212b !important; -webkit-text-fill-color: #18212b !important; }
+:root[data-theme="light"] .MuiFormLabel-root { color: #536273 !important; }
+:root[data-theme="light"] .MuiOutlinedInput-notchedOutline { border-color: rgba(24,33,43,.25); }
+:root[data-theme="light"] .MuiDialog-root .MuiDialog-paper,
+:root[data-theme="light"] .MuiPopover-paper,
+:root[data-theme="light"] .MuiMenu-paper { background: #fff !important; color: #18212b !important; border-color: rgba(24,33,43,.16); }
+:root[data-theme="light"] .MuiDialog-root .MuiDialogTitle-root,
+:root[data-theme="light"] .MuiDialog-root .MuiDialogContent-root,
+:root[data-theme="light"] .MuiDialog-root .MuiDialogActions-root { color: #18212b; }
+:root[data-theme="light"] .MuiDialog-root .MuiInputBase-input,
+:root[data-theme="light"] .MuiDialog-root .MuiSelect-select { color: #18212b !important; -webkit-text-fill-color: #18212b !important; }
+:root[data-theme="light"] .MuiMenuItem-root { color: #18212b; }
+:root[data-theme="light"] .MuiButton-outlined { color: #b55400; border-color: #d9823b; }
+:root[data-theme="light"] .MuiButton-text { color: #b55400; }
+:root[data-theme="light"] .MuiTab-root { color: #536273; }
+:root[data-theme="light"] .MuiTab-root.Mui-selected { color: #b55400; }
+:root[data-theme="light"] .MuiSvgIcon-root { color: #415364; }
+:root[data-theme="light"] .MuiIconButton-root { color: #415364 !important; }
+:root[data-theme="light"] .MuiIconButton-root.MuiIconButton-colorPrimary { color: #1769aa !important; }
+:root[data-theme="light"] .MuiIconButton-root.MuiIconButton-colorError { color: #c62828 !important; }
+
+/* Abas com separação e estados de leitura claros. */
+.MuiTabs-root {
+  border-bottom: 1px solid #303640;
+  min-height: 48px;
+}
+.MuiTabs-flexContainer { gap: 4px; }
+.MuiTab-root {
+  min-height: 48px;
+  color: #aeb8c5 !important;
+  font-weight: 700;
+  opacity: 1 !important;
+}
+.MuiTab-root:hover { color: #ffae66 !important; background: rgba(255,138,36,.07); }
+.MuiTab-root.Mui-selected { color: #ff9b3d !important; }
+.MuiTabs-indicator { background-color: #ff9b3d !important; height: 3px; border-radius: 3px 3px 0 0; }
+:root[data-theme="light"] .MuiTabs-root { border-bottom-color: rgba(24,33,43,.16); }
+:root[data-theme="light"] .MuiTab-root { color: #536273 !important; }
+:root[data-theme="light"] .MuiTab-root:hover { color: #b55400 !important; }
+:root[data-theme="light"] .MuiTab-root.Mui-selected { color: #b55400 !important; }
+:root[data-theme="light"] .MuiTabs-indicator { background-color: #d96b00 !important; }
+.MuiButton-root { text-transform: none !important; }
+/* Ações primárias (editar) usam o laranja da identidade visual. */
+.MuiSvgIcon-colorPrimary { color: #ff9b3d !important; }
+.MuiIconButton-root.MuiIconButton-colorPrimary { color: #ff9b3d !important; }
+.MuiButton-colorPrimary .MuiSvgIcon-root { color: #ff9b3d !important; }
+:root[data-theme="light"] .MuiSvgIcon-colorPrimary { color: #d96b00 !important; }
+:root[data-theme="light"] .MuiIconButton-root.MuiIconButton-colorPrimary { color: #d96b00 !important; }
+:root[data-theme="light"] .MuiButton-colorPrimary .MuiSvgIcon-root { color: #d96b00 !important; }
+/* Padrão final de ações: editar e ações comuns em branco; semânticas preservadas. */
+.MuiSvgIcon-colorPrimary { color: #f5f7fa !important; }
+.MuiIconButton-root.MuiIconButton-colorPrimary { color: #f5f7fa !important; }
+.MuiButton-colorPrimary .MuiSvgIcon-root { color: #f5f7fa !important; }
+:root[data-theme="light"] .MuiSvgIcon-colorPrimary { color: #344454 !important; }
+:root[data-theme="light"] .MuiIconButton-root.MuiIconButton-colorPrimary { color: #344454 !important; }
+:root[data-theme="light"] .MuiButton-colorPrimary .MuiSvgIcon-root { color: #344454 !important; }
+
+/* Layouts específicos para evitar campos comprimidos em Grid legado. */
+.tarefa-filters-grid { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px !important; margin: 0 !important; }
+.tarefa-filters-grid > .MuiGrid-item { max-width: none !important; width: auto !important; padding: 0 !important; }
+.tarefa-modal-form > .MuiGrid-container { display: flex !important; flex-direction: column !important; gap: 16px !important; margin: 0 !important; }
+.tarefa-modal-form > .MuiGrid-container > .MuiGrid-item { max-width: none !important; width: 100% !important; padding: 0 !important; }
+@media (max-width: 900px) { .tarefa-filters-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .tarefa-filters-grid { grid-template-columns: 1fr; } }
+.tarefa-filters-grid { align-items: end !important; }
+.tarefa-filters-grid > .MuiGrid-item { align-self: end !important; }
+.tarefa-filters-grid .MuiTextField-root { width: 100%; }
+
+/* Ações da tabela de solicitações: compactas, reservadas e sem sobreposição. */
+.solicitacao-acoes-cell { white-space: normal !important; }
+.solicitacao-acoes { display: flex !important; flex-wrap: wrap !important; gap: 4px !important; justify-content: flex-end !important; }
+.solicitacao-acoes .MuiIconButton-root { width: 32px; height: 32px; padding: 6px; }
+@media (max-width: 700px) {
+  .solicitacao-acoes-cell { min-width: 128px !important; width: 128px !important; }
+  .solicitacao-acoes { justify-content: flex-start !important; }
+}
+
+/* Solicitações sem rolagem horizontal: colunas adaptáveis e truncamento seguro. */
+.solicitacoes-table { overflow-x: hidden !important; }
+.solicitacoes-table table { width: 100%; table-layout: fixed; }
+.solicitacoes-table th,
+.solicitacoes-table td { overflow: hidden; text-overflow: ellipsis; }
+.solicitacoes-table th:nth-child(1), .solicitacoes-table td:nth-child(1) { width: 20%; }
+.solicitacoes-table th:nth-child(2), .solicitacoes-table td:nth-child(2) { width: 8%; }
+.solicitacoes-table th:nth-child(3), .solicitacoes-table td:nth-child(3) { width: 15%; }
+.solicitacoes-table th:nth-child(4), .solicitacoes-table td:nth-child(4) { width: 20%; }
+.solicitacoes-table th:nth-child(5), .solicitacoes-table td:nth-child(5) { width: 14%; }
+.solicitacoes-table th:nth-child(6), .solicitacoes-table td:nth-child(6) { width: 13%; }
+.solicitacoes-table th:nth-child(7), .solicitacoes-table td:nth-child(7) { width: 10%; }
+@media (max-width: 700px) {
+  .solicitacoes-table th:nth-child(4), .solicitacoes-table td:nth-child(4),
+  .solicitacoes-table th:nth-child(5), .solicitacoes-table td:nth-child(5) { display: none; }
+  .solicitacoes-table th:nth-child(1), .solicitacoes-table td:nth-child(1) { width: 30%; }
+  .solicitacoes-table th:nth-child(2), .solicitacoes-table td:nth-child(2) { width: 10%; }
+  .solicitacoes-table th:nth-child(3), .solicitacoes-table td:nth-child(3) { width: 22%; }
+  .solicitacoes-table th:nth-child(6), .solicitacoes-table td:nth-child(6) { width: 20%; }
+  .solicitacoes-table th:nth-child(7), .solicitacoes-table td:nth-child(7) { width: 18%; }
+  .solicitacoes-table .solicitacao-acoes { justify-content: flex-start !important; }
+}
+.solicitacoes-table .solicitacao-acoes { flex-wrap: nowrap !important; gap: 2px !important; }
+.solicitacoes-table .solicitacao-acoes-cell { min-width: 150px !important; width: 150px !important; }
+.solicitacoes-table td:nth-child(4) { max-width: 120px; }
+.solicitacoes-table td:nth-child(4) .MuiTypography-root { display: block; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.solicitacoes-table td:nth-child(6) .MuiTypography-root { font-size: .78rem; white-space: nowrap; }
+@media (max-width: 700px) { .solicitacoes-table .solicitacao-acoes { flex-wrap: wrap !important; } }
+
+/* Relatórios: cards e filtros distribuídos sem campos estreitos. */
+.relatorios-indicadores { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px !important; margin: 0 0 24px !important; }
+.relatorios-indicadores > .MuiGrid-item { max-width: none !important; width: auto !important; padding: 0 !important; }
+.relatorios-filtros { display: grid !important; grid-template-columns: minmax(220px, 1.5fr) repeat(2, minmax(150px, 1fr)) minmax(130px, .8fr); gap: 12px !important; margin: 0 0 16px !important; }
+.relatorios-filtros > .MuiGrid-item { max-width: none !important; width: auto !important; padding: 0 !important; }
+.relatorios-filtros .MuiTextField-root { width: 100%; }
+.relatorios-table { width: 100%; table-layout: fixed; }
+.relatorios-table th, .relatorios-table td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 900px) { .relatorios-indicadores { grid-template-columns: repeat(3, minmax(0, 1fr)); } .relatorios-filtros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .relatorios-indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); } .relatorios-filtros { grid-template-columns: 1fr; } .relatorios-table th, .relatorios-table td { padding: 8px 6px; font-size: 12px; } }
+
+.dashboard-indicadores { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.dashboard-graficos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1100px) { .dashboard-indicadores { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dashboard-graficos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .dashboard-indicadores, .dashboard-graficos { grid-template-columns: 1fr; } }
+
+/* Chips neutros legíveis nos dois temas. */
+.MuiChip-root { color: #f5f7fa; border-color: #8b97a6; font-weight: 600; }
+.MuiChip-label { color: inherit; }
+:root[data-theme="light"] .MuiChip-root { color: #344454; border-color: #83909d; }
+.dashboard-total-chip,
+.dashboard-total-chip .MuiChip-label { color: #f5f7fa !important; border-color: #9aa6b5 !important; font-weight: 700 !important; }
+:root[data-theme="light"] .dashboard-total-chip,
+:root[data-theme="light"] .dashboard-total-chip .MuiChip-label { color: #344454 !important; border-color: #687887 !important; }
